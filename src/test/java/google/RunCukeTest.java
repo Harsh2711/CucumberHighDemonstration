@@ -8,7 +8,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin =  {"json:results/cucumber-report/cucumber.json"}
-             , features= {"classpath:google/features/"},glue="google/steps")
+             , features= {"src/test/java/google/features/test2.feature"},glue="google/steps")
 public class RunCukeTest {
 	
 }

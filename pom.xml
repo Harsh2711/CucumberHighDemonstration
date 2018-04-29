@@ -11,6 +11,47 @@
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyy_MM_dd_HH_mm</maven.build.timestamp.format>
 	</properties>
+
+	<build>
+		<plugins>
+
+			
+
+			<plugin>
+				<groupId>net.masterthought</groupId>
+				<artifactId>maven-cucumber-reporting</artifactId>
+				<version>3.16.0</version>
+				<executions>
+					<execution>
+						<id>execution</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<projectName>cucumberdemo</projectName>
+							<outputDirectory>results/cucumber-report/${timestamp}</outputDirectory>
+							<cucumberOutput>results/cucumber-report/</cucumberOutput>
+							<enableFlashCharts>false</enableFlashCharts>
+							
+							<checkBuildResult>false</checkBuildResult>
+						</configuration>
+					</execution>
+				</executions>
+				
+				
+			</plugin>
+			
+			<plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>2.20</version>
+      <configuration>
+        <testFailureIgnore>true</testFailureIgnore>
+     </configuration>
+</plugin>
+		</plugins>
+	</build>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
 		<!-- https://mvnrepository.com/artifact/info.cukes/gherkin -->
@@ -69,33 +110,6 @@
 		<!-- <version>0.0.2</version> -->
 		<!-- </dependency> -->
 
+
 	</dependencies>
-	<build>
-		<plugins>
-
-			
-
-			<plugin>
-				<groupId>net.masterthought</groupId>
-				<artifactId>maven-cucumber-reporting</artifactId>
-				<version>3.16.0</version>
-				<executions>
-					<execution>
-						<id>execution</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<projectName>cucumberdemo</projectName>
-							<outputDirectory>results/cucumber-report/${timestamp}</outputDirectory>
-							<cucumberOutput>results/cucumber-report/</cucumberOutput>
-							<enableFlashCharts>false</enableFlashCharts>
-
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>
