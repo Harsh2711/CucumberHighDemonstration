@@ -98,53 +98,55 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.21.0</version>
-				<executions>
-					<execution>
-						<id>acceptance-test</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>test</goal>
-						</goals>
-						<configuration>
-							<forkCount>2</forkCount>
-							<reuseForks>false</reuseForks>
-							<argLine>-Duser.language=en</argLine>
-							<argLine>-Xmx1024m</argLine>
-							<argLine>-XX:MaxPermSize=256m</argLine>
-							<argLine>-Dfile.encoding=UTF-8</argLine>
-							<useFile>false</useFile>
-							<includes>
-								<include>**/*AT.class</include>
-							</includes>
-							<testFailureIgnore>true</testFailureIgnore>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			 <plugin>
+            <groupId>com.github.temyers</groupId>
+            <artifactId>cucumber-jvm-parallel-plugin</artifactId>
+            <version>5.0.0</version>
+            <executions>
+                <execution>
+                    <id>generateRunners</id>
+                    <phase>generate-test-sources</phase>
+                    <goals>
+                        <goal>generateRunners</goal>
+                    </goals>
+                    <configuration>
+                        <glue>
+                            <package>google.steps</package>
+                        </glue>
+                        <outputDirectory>results/cucumber-report/${timestamp}</outputDirectory>
+                        <featuresDirectory>src/test/resources/features/</featuresDirectory>
+                        <cucumberOutputDir>results/cucumber-report/</cucumberOutputDir>
+                        <namingPattern>Parallel{c}IT</namingPattern>
+                        <!-- One of [SCENARIO, FEATURE]. SCENARIO generates one runner per scenario.  FEATURE generates a runner per feature. -->
+                        <parallelScheme>FEATURE</parallelScheme>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+			
 
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.codehaus.mojo</groupId> -->
-<!-- 				<artifactId>exec-maven-plugin</artifactId> -->
-<!-- 				<version>1.6.0</version> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<phase>post-integration-test</phase> -->
-<!-- 						<goals> -->
-<!-- 							<goal>java</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 				<configuration> -->
-<!-- 					<mainClass>framework.JSONReportMerger</mainClass> -->
-<!-- 					<arguments> -->
-<!-- 						<argument>results/cucumber-report/</argument> -->
-<!-- 					</arguments> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
+ <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.19.1</version>
+            <executions>
+                <execution>
+                    <id>acceptance-test</id>
+                    <phase>integration-test</phase>
+                    <goals>
+                        <goal>integration-test</goal>
+                    </goals>
+                    <configuration>
+                        <forkCount>2</forkCount>
+                        <reuseForks>true</reuseForks>
+                        <includes>
+                            <include>**/*IT.class</include>
+                        </includes>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        
 			<plugin>
 				<groupId>net.masterthought</groupId>
 				<artifactId>maven-cucumber-reporting</artifactId>
