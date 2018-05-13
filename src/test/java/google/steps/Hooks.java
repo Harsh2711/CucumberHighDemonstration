@@ -15,8 +15,11 @@ import framework.DriverFactory;
 public class Hooks {
 
 	
+	
 	@Before
     public void beforeScenario(){
+		
+		
 		System.out.println("in Before Scenerio##############################");
 		try {
 			ConfigurationManager.loadProperties();
