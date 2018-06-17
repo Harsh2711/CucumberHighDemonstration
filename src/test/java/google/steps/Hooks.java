@@ -19,13 +19,8 @@ public class Hooks {
 	@Before
     public void beforeScenario(){
 		
-		
 		System.out.println("in Before Scenerio##############################");
-		try {
-			ConfigurationManager.loadProperties();
-		} catch (ConfigurationException e) {
-			System.out.println("properties not loaded");
-		}
+		ConfigurationManager.loadProperties();
         WebDriver driver=DriverFactory.createInstance(ConfigurationManager.getBundle().getString("browser"));
         BaseDriver.setDriver(driver);
         
