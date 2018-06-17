@@ -119,9 +119,10 @@
                         <namingPattern>Parallel{c}IT</namingPattern>
                         <!-- One of [SCENARIO, FEATURE]. SCENARIO generates one runner per scenario.  FEATURE generates a runner per feature. -->
                         <parallelScheme>SCENARIO</parallelScheme>
+                       <!-- 
                         <tags>
                         <tag>@first</tag>
-                        </tags>
+                        </tags> -->
                     </configuration>
                 </execution>
             </executions>
